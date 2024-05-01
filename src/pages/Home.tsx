@@ -12,6 +12,7 @@ import {
 import {
   Bell,
   CircleUser,
+  Home,
   Menu,
   Package,
   Package2,
@@ -42,6 +43,7 @@ const HomePage = () => {
                 to="/"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
+                <Home className="h-4 w-4" />
                 Home
               </Link>
 
@@ -88,6 +90,7 @@ const HomePage = () => {
                   to="/"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
+                  <Home className="h-4 w-4" />
                   Home
                 </Link>
 
