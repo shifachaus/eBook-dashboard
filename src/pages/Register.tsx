@@ -25,7 +25,7 @@ const RegisterPage = () => {
   const mutation = useMutation({
     mutationFn: register,
     onSuccess: () => {
-      console.log("Login successful");
+      console.log("Register successful");
       navigate("/dashboard/home");
     },
   });
