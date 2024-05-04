@@ -63,7 +63,7 @@ const BooksPage = () => {
 
         <Link to={"/dashboard/books/create"}>
           <Button size={"sm"}>
-            <CirclePlus size={20} className="" />
+            <CirclePlus size={20} />
             <span className="ml-2">Add book</span>
           </Button>
         </Link>
