@@ -1,7 +1,12 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import useTokenStore from "@/store";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,29 +14,33 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import useTokenStore from "@/store";
 import {
   Bell,
   CircleUser,
   Home,
+  LineChart,
   Menu,
   Package,
   Package2,
   Search,
+  ShoppingCart,
   Users,
 } from "lucide-react";
-
-import { Link, Navigate, Outlet } from "react-router-dom";
+import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
-  const { token, setToken } = useTokenStore((store) => store);
+  const { token, setToken } = useTokenStore((state) => state);
 
-  if (!token) {
+  if (token === "") {
     return <Navigate to={"/auth/login"} replace />;
   }
 
   const logout = () => {
-    console.log("Logging Out!!!");
+    console.log("Logging out!");
     setToken("");
   };
 
@@ -42,7 +51,7 @@ const DashboardLayout = () => {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Package2 className="h-6 w-6" />
-              <span className="">eBook</span>
+              <span className="">Coder's Book</span>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
               <Bell className="h-4 w-4" />
@@ -51,28 +60,29 @@ const DashboardLayout = () => {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
+              <NavLink
                 to="/dashboard/home"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={({ isActive }) => {
+                  return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive && "bg-muted"
+                  }`;
+                }}
               >
                 <Home className="h-4 w-4" />
                 Home
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/dashboard/books"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                className={({ isActive }) => {
+                  return `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive && "bg-muted"
+                  }`;
+                }}
               >
                 <Package className="h-4 w-4" />
                 Books
-              </Link>
-              <Link
-                to="/"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Users className="h-5 w-5" />
-                Customers
-              </Link>
+              </NavLink>
             </nav>
           </div>
         </div>
@@ -97,30 +107,31 @@ const DashboardLayout = () => {
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
                   <Package2 className="h-6 w-6" />
-                  <span className="sr-only">eBooks</span>
+                  <span className="sr-only">Acme Inc</span>
                 </Link>
-                <Link
+                <NavLink
                   to="/dashboard/home"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  className={({ isActive }) => {
+                    return `mx-[-0.65rem] flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                      isActive && "bg-muted"
+                    }`;
+                  }}
                 >
                   <Home className="h-4 w-4" />
                   Home
-                </Link>
+                </NavLink>
 
-                <Link
+                <NavLink
                   to="/dashboard/books"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  className={({ isActive }) => {
+                    return `mx-[-0.65rem] flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                      isActive && "bg-muted"
+                    }`;
+                  }}
                 >
-                  <Package className="h-5 w-5" />
+                  <Package className="h-4 w-4" />
                   Books
-                </Link>
-                <Link
-                  to="/"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Customers
-                </Link>
+                </NavLink>
               </nav>
             </SheetContent>
           </Sheet>
