@@ -34,7 +34,8 @@ import {
 import { getBooks } from "@/http/api";
 import { Book } from "@/types";
 import { useQuery } from "@tanstack/react-query";
-import { LoaderCircle, MoreHorizontal } from "lucide-react";
+import { CirclePlus, LoaderCircle, MoreHorizontal } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BooksPage = () => {
   const { data, isLoading, isError } = useQuery({
@@ -47,17 +48,26 @@ const BooksPage = () => {
 
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/dashboard/home">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Books</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <div className="flex justify-between items-center">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/dashboard/home">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Books</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <Link to={"/dashboard/books/create"}>
+          <Button size={"sm"}>
+            <CirclePlus size={20} className="" />
+            <span className="ml-2">Add book</span>
+          </Button>
+        </Link>
+      </div>
 
       <Card className="mt-6">
         <CardHeader>
